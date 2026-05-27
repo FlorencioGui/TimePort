@@ -1,0 +1,75 @@
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: linear-gradient(90deg, #3d5eab 44%, #001850 100%);
+  color: white;
+  font-family: "Geist", sans-serif;
+}
+.logo img {
+  height: 40px;
+  width: auto;
+}
+.seta {
+  width: 12px;
+  height: 10px;
+  margin-left: 2px;
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+nav ul li {
+  display: flex;
+  align-items: center;
+}
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+.tpplus {
+  color: #ff8d28;
+}
+.img-user {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+.user a{
+  display: flex;
+  align-items: center;
+}
+header a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 17px;
+}
+.pt1 {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+.pt2 {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.lingua a {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border: #FF8D28 solid 1px;
+  border-radius: 10px;
+  padding: 5px 10px;
+}
