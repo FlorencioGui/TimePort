@@ -9,7 +9,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 40px;
+  padding: 15px 40px;
   background: linear-gradient(90deg, #3d5eab 44%, #001850 100%);
   color: white;
   font-family: "Geist", sans-serif;
@@ -71,5 +71,60 @@ header a {
   gap: 5px;
   border: #FF8D28 solid 1px;
   border-radius: 10px;
-  padding: 5px 10px;
+  padding: 10px 10px;
+  background-color: white;
+  color : #000000;
+}
+.lingua img {
+  width: 20px;
+  height: 20px;
+}
+
+/* Sobreposição da Modal de Idiomas */
+.modal-lingua {
+  display: none;
+  position: absolute;
+  top: 70px;
+  right: 40px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  min-width: 200px;
+}
+
+.modal-lingua.active {
+  display: block;
+}
+
+.modal-content {
+  padding: 15px;
+}
+
+.modal-content h3 {
+  color: #1a1a1a;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.modal-content ul {
+  list-style: none;
+}
+
+.modal-content li {
+  padding: 8px 0;
+}
+
+.modal-content a {
+  color: #1a1a1a;
+  text-decoration: none;
+  display: block;
+  padding: 8px 10px;
+  border-radius: 5px;
+  transition: background-color 0.2s;
+}
+
+.modal-content a:hover {
+  background-color: #f0f0f0;
 }
