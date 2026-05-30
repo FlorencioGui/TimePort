@@ -9,13 +9,13 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 40px;
+  padding: 5px 40px;
   background: linear-gradient(90deg, #3d5eab 44%, #001850 100%);
   color: white;
   font-family: "Geist", sans-serif;
 }
 .logo img {
-  height: 40px;
+  height: 60px;
   width: auto;
 }
 .seta {
@@ -26,7 +26,7 @@ header {
 nav ul {
   list-style: none;
   display: flex;
-  gap: 20px;
+  gap: 40px;
 }
 nav ul li {
   display: flex;
@@ -36,6 +36,7 @@ nav ul li a {
   color: white;
   text-decoration: none;
   font-weight: bold;
+  font-size: 18px;
 }
 .tpplus {
   color: #ff8d28;
@@ -45,7 +46,7 @@ nav ul li a {
   height: 30px;
   margin-right: 10px;
 }
-.user a{
+.user a {
   display: flex;
   align-items: center;
 }
@@ -69,62 +70,216 @@ header a {
   display: flex;
   align-items: center;
   gap: 5px;
-  border: #FF8D28 solid 1px;
+  border: #ff8d28 solid 1px;
   border-radius: 10px;
   padding: 10px 10px;
   background-color: white;
-  color : #000000;
+  color: #000000;
 }
 .lingua img {
   width: 20px;
   height: 20px;
 }
+.carrossel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background: linear-gradient(90deg, #3d5eab 44%, #001850 100%);
+}
+.carrossel-janela {
+  overflow: hidden;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 900px;
+}
+.carrossel-faixa {
+  display: flex;
+  transition: transform 0.4s ease;
+}
+.carrossel-item {
+  min-width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.titulo-carrossel {
+  background-color: #ff8d28;
+  color: white;
+  font-weight: bold;
+  padding: 10px 24px;
+  border-radius: 30px;
+  font-size: 15px;
+  position: absolute;
+  top: -18px;
+  z-index: 2;
+}
+.card {
+  display: flex;
+  border: 2px solid #ff8d28;
+  border-radius: 16px;
+  overflow: hidden;
+  width: 100%;
+}
+.painel-esquerdo {
+  background: white;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 220px;
+  max-width: 240px;
+}
+.destino-header {
+  display: flex;
+  flex-direction: column;
+}
+.maquinadotempo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.robo-icon {
+  width: 15px;
+  height: 15px;
+  margin-bottom: 2px;
+}
+.maquina-texto {
+  font-size: 11px;
+  color: #888;
+}
+.destino-nome {
+  font-weight: bold;
+  font-size: 14px;
+  color: #1a1a1a;
+  margin-top: 2px;
+}
+.pacote {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.titulo-pacote {
+  background-color: #ff8d28;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 4px 10px;
+  border-radius: 20px;
+  display: inline-block;
+  width: fit-content;
+}
+.tp {
+  color: #3d5eab;
+}
+.a-partir {
+  font-size: 11px;
+  color: #888;
+}
+.preco {
+  font-size: 13px;
+  color: #1a1a1a;
+}
+.preco strong {
+  font-size: 18px;
+}
+.dias {
+  color: #3d5eab;
+  font-weight: bold;
+  font-size: 15px;
+}
+.destaque {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.img-destaque {
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+.destaque-texto {
+  font-size: 11px;
+  text-align: center;
+  color: #444;
+}
+.painel-direito {
+  flex: 1;
+}
+.painel-direito img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.btn-proximo {
+  position: absolute;
+  right: 50px;
+  background-color: white;
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 20px;
+  color: #ff8d28;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 3;
+}
+.btn-proximo:hover {
+  background-color: #ff8d28;
+  color: white;
+}
 
-/* Sobreposição da Modal de Idiomas */
 .modal-lingua {
   display: none;
   position: absolute;
-  top: 70px;
+  top: 75px;
   right: 40px;
   background-color: white;
   border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
   z-index: 1000;
-  min-width: 200px;
+  min-width: 180px;
+  overflow: hidden;
 }
-
 .modal-lingua.active {
   display: block;
 }
-
 .modal-content {
-  padding: 15px;
+  padding: 8px;
 }
-
 .modal-content h3 {
-  color: #1a1a1a;
-  margin-bottom: 10px;
-  font-size: 14px;
+  color: #888;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 8px 10px 4px;
 }
-
 .modal-content ul {
   list-style: none;
 }
-
 .modal-content li {
-  padding: 8px 0;
+  padding: 0;
 }
-
 .modal-content a {
   color: #1a1a1a;
   text-decoration: none;
-  display: block;
-  padding: 8px 10px;
-  border-radius: 5px;
-  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  transition: background-color 0.15s;
 }
-
 .modal-content a:hover {
-  background-color: #f0f0f0;
+  background-color: #f5f5f5;
+  color: #3d5eab;
 }

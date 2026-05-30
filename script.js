@@ -20,7 +20,28 @@ linguas.forEach((lingua) => {
   lingua.addEventListener("click", (e) => {
     e.preventDefault();
     const idiomaSelected = e.target.dataset.lang;
-    console.log("Idioma selecionado:", idiomaSelected);
+    atualizarBotao(idiomaSelected);
+    localStorage.setItem("idiomaSelecionado", idiomaSelected);
     modalLingua.classList.remove("active");
   });
 });
+
+// Atualiza o texto do botão
+const idiomaInfo = {
+  pt: { bandeira: "files/language-icon.png", texto: "PT-BR • R$" },
+  en: { bandeira: "files/language-icon2.png", texto: "EN-US • $" },
+  es: { bandeira: "files/language-icon3.png", texto: "ES • €" },
+};
+
+function atualizarBotao(lang) {
+  document.getElementById("textoAtual").textContent = idiomaInfo[lang].texto;
+  document.getElementById("bandeira-atual").src = idiomaInfo[lang].bandeira;
+}
+
+// Carrega o idioma salvo ao abrir a página
+function carregarIdiomaPreferido() {
+  const idiomaSalvo = localStorage.getItem("idiomaSelecionado") || "pt";
+  atualizarBotao(idiomaSalvo);
+}
+
+document.addEventListener("DOMContentLoaded", carregarIdiomaPreferido);

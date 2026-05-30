@@ -9,7 +9,7 @@
   <body>
     <header>
       <div class="pt1">
-        <div class="logo"><img src="" alt="Logo" /></div>
+        <div class="logo"><img src="files/logo.png" alt="Logo" /></div>
         <nav>
           <ul>
             <li>
@@ -46,20 +46,85 @@
         </div>
         <div class="lingua" id="btnLingua">
           <a href="#">
-            <img src="files/language-icon.png" alt="Ícone de Idioma" />
-            PT-BR &bull; R$
+            <img
+              src="files/language-icon.png"
+              alt="Ícone de Idioma"
+              id="bandeira-atual"
+            />
+            <span id="textoAtual">PT-BR &bull; R$</span>
           </a>
         </div>
       </div>
     </header>
+    <main>
+      <section class="carrossel">
+        <button id="btnAnterior">&#8592;</button>
+        <span class="titulo-carrossel"
+          >Viaje para a Época e Lugar que quiser!</span
+        >
+        <div class="carrossel-janela">
+          <div class="carrossel-faixa" id="carrosselFaixa">
+            <div class="carrossel-item">
+              <div class="card">
+                <!-- PAINEL ESQUERDO -->
+                <div class="painel-esquerdo">
+                  <div class="destino-header">
+                    <div class="maquinadotempo">
+                      <img src="files/robo.png" alt="Ícone" class="robo-icon" />
+                      <span class="maquina-texto">Máquina do tempo</span>
+                    </div>
+                    <p class="destino-nome">RIO DE JANEIRO | 1958</p>
+                  </div>
+                  <div class="pacote">
+                    <span class="titulo-pacote">1 Semana | 6 noites</span>
+                    <p class="a-partir">a partir de:</p>
+                    <p class="preco">
+                      12x de <strong>R$490</strong> por pessoa
+                    </p>
+                    <p class="dias">DIAS: 23-30/Junho</p>
+                  </div>
+                  <div class="pacote">
+                    <span class="titulo-pacote"
+                      >2 Semanas | 13 noites <span class="tp">TP</span></span
+                    >
+                    <p class="a-partir">a partir de:</p>
+                    <p class="preco">
+                      12x de <strong>R$700</strong> por pessoa
+                    </p>
+                    <p class="dias">DIAS: 15-30/Junho</p>
+                  </div>
+                  <div class="destaque">
+                    <img
+                      src="files/destaque-item1.png"
+                      alt="Pelé"
+                      class="img-destaque"
+                    />
+                    <p class="destaque-texto">
+                      Veja ao vivo a primeira final de copas do Brasil!
+                    </p>
+                  </div>
+                </div>
+                <div class="painel-direito">
+                  <img src="files/rio-1958.jpg" alt="Rio de Janeiro 1958" />
+                </div>
+              </div>
+            </div>
+            <div class="carrossel-item">Item 2</div>
+            <div class="carrossel-item">Item 3</div>
+            <div class="carrossel-item">Item 4</div>
+          </div>
+        </div>
+        <button id="btnProximo">&#8594;</button>
+      </section>
+    </main>
 
     <div class="modal-lingua" id="modalLingua">
       <div class="modal-content">
         <h3>Selecione o idioma</h3>
         <ul>
-          <li><a href="#" data-lang="pt">🇧🇷 Português</a></li>
-          <li><a href="#" data-lang="en">🇺🇸 English</a></li>
-          <li><a href="#" data-lang="es">🇪🇸 Español</a></li>
+          <li><a href="#" data-lang="pt">PT-BR &bull; R$</a></li>
+          <li><a href="#" data-lang="en">EN-US &bull; $</a></li>
+          <li><a href="#" data-lang="es">ES &bull; €</a></li>
         </ul>
       </div>
     </div>
