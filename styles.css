@@ -85,7 +85,7 @@ header a {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px;
+  padding: 60px;
   background: linear-gradient(90deg, #3d5eab 44%, #001850 100%);
 }
 .carrossel-janela {
@@ -113,8 +113,9 @@ header a {
   border-radius: 30px;
   font-size: 15px;
   position: absolute;
-  top: -18px;
+  top: 40px;
   z-index: 2;
+  font-family: "Geist", sans-serif;
 }
 .card {
   display: flex;
@@ -122,19 +123,27 @@ header a {
   border-radius: 16px;
   overflow: hidden;
   width: 100%;
+  font-family: "Geist", sans-serif;
+  position: relative;
+  background-image: url("files/cristoredentor.png");
+  background-size: cover;
+  background-position: center;
 }
 .painel-esquerdo {
   background: white;
-  padding: 24px 16px;
+  padding: 24px 0;
   display: flex;
   flex-direction: column;
   gap: 16px;
   min-width: 220px;
   max-width: 240px;
+  border: 2px solid #ff8d28;
+  border-radius: 14px;
 }
 .destino-header {
   display: flex;
   flex-direction: column;
+  margin-left: 10px;
 }
 .maquinadotempo {
   display: flex;
@@ -167,28 +176,39 @@ header a {
   font-size: 12px;
   font-weight: bold;
   padding: 4px 10px;
-  border-radius: 20px;
-  display: inline-block;
-  width: fit-content;
+  border-radius: 0 20px 20px 0;
+  display: inline;
+  width: 180px;
 }
 .tp {
-  color: #3d5eab;
+  color: #ff8d28;
+  margin-left: 6px;
 }
 .a-partir {
   font-size: 11px;
   color: #888;
+  margin-top: 4px;
+  margin-left: 10px;
 }
 .preco {
   font-size: 13px;
   color: #1a1a1a;
+  margin-left: 10px;
 }
 .preco strong {
-  font-size: 18px;
+  font-size: 20px;
 }
 .dias {
-  color: #3d5eab;
+  color: #ff8d28;
   font-weight: bold;
   font-size: 15px;
+  margin-left: 10px;
+}
+.azul{
+  color: #3d5eab;
+}
+.fundo-azul{
+  background-color: #3d5eab;
 }
 .destaque {
   display: flex;
@@ -197,9 +217,11 @@ header a {
   gap: 6px;
 }
 .img-destaque {
-  width: 100%;
+  width: 60%;
+  height: 70%;
   border-radius: 8px;
-  object-fit: cover;
+  object-fit: fill;
+  border: 2px solid #3d5eab;
 }
 .destaque-texto {
   font-size: 11px;
@@ -215,23 +237,9 @@ header a {
   object-fit: cover;
   display: block;
 }
-.btn-proximo {
-  position: absolute;
-  right: 50px;
-  background-color: white;
-  border: none;
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
-  font-size: 20px;
-  color: #ff8d28;
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  z-index: 3;
-}
-.btn-proximo:hover {
-  background-color: #ff8d28;
-  color: white;
+.btn{
+  width: 40px;
+  height: 40px;
 }
 
 .modal-lingua {
