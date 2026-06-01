@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&display=swap");
+@import url("https://fonts.google.com/css2?family=Geist:wght@400;500;700&display=swap");
 
 * {
   margin: 0;
@@ -89,10 +89,13 @@ header a {
   background: linear-gradient(90deg, #3d5eab 44%, #001850 100%);
 }
 .carrossel-janela {
-  overflow: hidden;
-  border-radius: 16px;
+  position: relative;
   width: 100%;
   max-width: 900px;
+}
+.carrossel-limite {
+  overflow: hidden;
+  border-radius: 16px;
 }
 .carrossel-faixa {
   display: flex;
@@ -205,10 +208,10 @@ header a {
   font-size: 15px;
   margin-left: 10px;
 }
-.azul{
+.azul {
   color: #3d5eab;
 }
-.fundo-azul{
+.fundo-azul {
   background-color: #3d5eab;
 }
 .destaque {
@@ -241,7 +244,9 @@ header a {
 .btn-proximo,
 .btn-anterior {
   position: absolute;
-  right: 250px;
+  right: -55px;
+  top: 50%;
+  transform: translateY(-50%);
   background: none;
   border: none;
   width: 50px;
@@ -252,8 +257,9 @@ header a {
   transition: transform 0.2s;
 }
 .btn-anterior {
-  left: 250px;
-  transform: scaleX(-1);
+  left: -55px;
+  right: auto;
+  transform: translateY(-50%) scaleX(-1);
 }
 .btn-proximo img,
 .btn-anterior img {
@@ -261,12 +267,11 @@ header a {
   height: 100%;
 }
 .btn-proximo:hover {
-  transform: scale(0.9);
+  transform: translateY(-50%) scale(0.9);
 }
 .btn-anterior:hover {
-  transform: scaleX(-1) scale(0.9);
+  transform: translateY(-50%) scaleX(-1) scale(0.9);
 }
-
 .modal-lingua {
   display: none;
   position: absolute;
@@ -317,4 +322,4 @@ header a {
   color: #3d5eab;
 }
 
-/*Lembrar de Modificar o carrossel de botões retirando seus botões para mobile e colocando o swap no JS */
+/* Lembrar de modificar o carrossel de botões retirando seus botões para mobile e colocando o swap no JS */
