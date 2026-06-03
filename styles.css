@@ -275,33 +275,35 @@ header a {
 button:focus {
   outline: none;
 }
-
 .carrossel-drag {
   position: relative;
   background: white;
   padding: 40px 0;
-  overflow: hidden; /* move o overflow para cá */
+  overflow: hidden;
+  perspective: 1400px;
 }
-
 .carrossel-drag-faixa {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 12px;
+  gap: 40px;
   cursor: grab;
   user-select: none;
   width: max-content;
   padding: 0 60px;
+  transform-style: preserve-3d;
 }
-
 .carrossel-drag-faixa:active {
   cursor: grabbing;
 }
-
 .carrossel-drag-item {
   flex-shrink: 0;
+  /* serve para que o navegador não tente encolher os itens para caber mais na tela */
+  transform-origin: center center;
+  /* Serve para mostrar que o ponto de referencia para tudo que estamos fazendo com a imagem é o centro dela, e não a borda ou outro ponto */
+  will-change: transform, opacity, filter;
+  /* Avisa ao navegador que essas propriedades vão estar em constante alteração, isso serve para dizer que ele deve ficar atento. */
 }
-
 .carrossel-drag-item img {
   width: 240px;
   height: 260px;
@@ -310,13 +312,13 @@ button:focus {
   pointer-events: none;
   display: block;
 }
-.circulo{
+.circulo {
   position: absolute;
-  width: 130%;
+  width: 117%;
   height: 150px;
   z-index: 2;
   top: -20%;
-  left: -15%;
+  left: -8.5%;
   /* border:#000000 solid 2px; */
 }
 .circulo-de-baixo {

@@ -81,10 +81,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!faixaDrag) return;
 
     const limite = faixaDrag.closest(".carrossel-drag");
-    const itemsNodes = Array.from(faixaDrag.children);
-    const totalItens = itemsNodes.length;
+    const itensOriginais = Array.from(faixaDrag.children);
+    const totalOriginais = itensOriginais.length;
 
-    // Fatores de física
     let isDragging = false;
     let startX = 0;
     let currentTranslate = 0;
@@ -94,64 +93,96 @@ document.addEventListener("DOMContentLoaded", () => {
     let lastTime = 0;
     let lastMouseX = 0;
 
-    // Dimensões
     let itemWidth = 0;
     let originalWidth = 0;
 
-    // 1. Clonar os itens ANTES e DEPOIS para criar o looping invisível
+    // Clona os itens para criar looping infinito
     function clonarParaInfinito() {
-      // Clona para o final (mantém a ordem normal)
-      itemsNodes.forEach((item) => {
+      itensOriginais.forEach((item) => {
         faixaDrag.appendChild(item.cloneNode(true));
       });
 
-      // Clona para o início (inverte a leitura para que o insertBefore mantenha a ordem correta)
-      [...itemsNodes].reverse().forEach((item) => {
+      [...itensOriginais].reverse().forEach((item) => {
         faixaDrag.insertBefore(item.cloneNode(true), faixaDrag.firstChild);
       });
     }
 
     clonarParaInfinito();
 
-    // 2. Calcular o tamanho da trilha original
+    const itensAnimados = Array.from(faixaDrag.children);
+
     function atualizarDimensoes() {
-      // Largura da imagem (240) + gap do flex (12)
-      itemWidth = itemsNodes[0].offsetWidth + 12;
-      originalWidth = totalItens * itemWidth;
-      // Começamos o carrossel na cópia do meio para termos margem de arraste
+      const gap = parseFloat(getComputedStyle(faixaDrag).gap) || 12;
+      itemWidth = itensOriginais[0].getBoundingClientRect().width + gap;
+      originalWidth = totalOriginais * itemWidth;
+
       currentTranslate = -originalWidth;
-      aplicarTransformacao();
+      prevTranslate = currentTranslate;
+
+      faixaDrag.style.transform = `translateX(${currentTranslate}px)`;
+      atualizarProfundidade();
     }
 
     function aplicarTransformacao() {
-      // Lógica do looping infinito: se chegar na ponta clonada, volta pro meio invisivelmente
       if (currentTranslate >= 0) {
         currentTranslate -= originalWidth;
+        prevTranslate = currentTranslate;
       } else if (currentTranslate <= -(originalWidth * 2)) {
         currentTranslate += originalWidth;
+        prevTranslate = currentTranslate;
       }
+
       faixaDrag.style.transform = `translateX(${currentTranslate}px)`;
+      atualizarProfundidade();
     }
 
-    // 3. Loop de Animação (Inércia)
+    function atualizarProfundidade() {
+      const faixaRect = limite.getBoundingClientRect();
+      const centro = faixaRect.left + faixaRect.width / 2;
+      const maxDist = faixaRect.width / 2 + itemWidth;
+
+      itensAnimados.forEach((item) => {
+        const rect = item.getBoundingClientRect();
+        const itemCentro = rect.left + rect.width / 2;
+
+        const distNormalizada = Math.min(
+          Math.abs(itemCentro - centro) / maxDist,
+          1,
+        );
+
+        // Curva suave: centro menor, laterais maiores
+        const ease = Math.pow(distNormalizada, 1.35);
+
+        const scale = 0.8 + ease * 0.5; // 0.66 -> 1.16
+        const translateY = (1 - ease) * 24; // centro mais "fundo"
+        const opacity = 0.72 + ease * 0.28; // 0.72 -> 1
+        const blur = (1 - ease) * 1.1; // centro mais suave
+        const zIndex = Math.round(ease * 100);
+
+        item.style.transform = `translateY(${translateY}px) scale(${scale})`;
+        item.style.opacity = opacity;
+        item.style.filter = `blur(${blur}px)`;
+        item.style.zIndex = zIndex;
+      });
+    }
+
     function loopInercia() {
-      if (isDragging) return; // Se o usuário pegar de novo, para a inércia
+      if (isDragging) return;
 
       currentTranslate += velocity;
-      velocity *= 0.96; // Fricção (quanto mais perto de 1, mais ele escorrega)
+      velocity *= 0.96;
 
       aplicarTransformacao();
 
-      // Continua animando enquanto a velocidade não for quase zero
       if (Math.abs(velocity) > 0.1) {
         animationID = requestAnimationFrame(loopInercia);
       }
     }
 
-    // 4. Funções de Arraste
     function iniciarArraste(e) {
       isDragging = true;
-      cancelAnimationFrame(animationID); // Para qualquer movimento de inércia que estiver rolando
+      cancelAnimationFrame(animationID);
+
       startX = e.type.includes("mouse") ? e.clientX : e.touches[0].clientX;
       prevTranslate = currentTranslate;
       lastMouseX = startX;
@@ -168,13 +199,13 @@ document.addEventListener("DOMContentLoaded", () => {
       const currentX = e.type.includes("mouse")
         ? e.clientX
         : e.touches[0].clientX;
+
       const now = Date.now();
       const dt = now - lastTime;
       const dx = currentX - lastMouseX;
 
-      // Calcula a velocidade do movimento
       if (dt > 0) {
-        velocity = (dx / dt) * 16; // Converte para pixels por frame (assumindo ~60fps)
+        velocity = (dx / dt) * 16;
       }
 
       lastTime = now;
@@ -188,26 +219,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function finalizarArraste() {
       if (!isDragging) return;
+
       isDragging = false;
       limite.style.cursor = "grab";
 
-      // Multiplicador do impulso
       velocity *= 0.75;
-
       animationID = requestAnimationFrame(loopInercia);
     }
 
-    // Eventos de Mouse
     limite.addEventListener("mousedown", iniciarArraste);
     document.addEventListener("mousemove", arrastar);
     document.addEventListener("mouseup", finalizarArraste);
 
-    // Eventos Touch
     limite.addEventListener("touchstart", iniciarArraste, { passive: true });
     document.addEventListener("touchmove", arrastar, { passive: true });
     document.addEventListener("touchend", finalizarArraste);
 
-    // Inicializa os tamanhos
+    window.addEventListener("resize", atualizarDimensoes);
+
     setTimeout(atualizarDimensoes, 100);
   }
 
