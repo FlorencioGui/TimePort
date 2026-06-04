@@ -96,7 +96,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let itemWidth = 0;
     let originalWidth = 0;
 
-    // Clona os itens para criar looping infinito
     function clonarParaInfinito() {
       itensOriginais.forEach((item) => {
         faixaDrag.appendChild(item.cloneNode(true));
@@ -113,10 +112,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function atualizarDimensoes() {
       const gap = parseFloat(getComputedStyle(faixaDrag).gap) || 12;
+
       itemWidth = itensOriginais[0].getBoundingClientRect().width + gap;
+
+      const larguraAntiga = originalWidth;
       originalWidth = totalOriginais * itemWidth;
 
-      currentTranslate = -originalWidth;
+      if (larguraAntiga === 0) {
+        currentTranslate = -originalWidth;
+      } else {
+        const proporcao = currentTranslate / larguraAntiga;
+        currentTranslate = proporcao * originalWidth;
+      }
+
       prevTranslate = currentTranslate;
 
       faixaDrag.style.transform = `translateX(${currentTranslate}px)`;
@@ -124,15 +132,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function aplicarTransformacao() {
-      if (currentTranslate >= 0) {
-        currentTranslate -= originalWidth;
-        prevTranslate = currentTranslate;
-      } else if (currentTranslate <= -(originalWidth * 2)) {
-        currentTranslate += originalWidth;
-        prevTranslate = currentTranslate;
-      }
+      if (originalWidth <= 0) return;
+
+      currentTranslate =
+        ((currentTranslate + originalWidth) % originalWidth) - originalWidth;
 
       faixaDrag.style.transform = `translateX(${currentTranslate}px)`;
+
       atualizarProfundidade();
     }
 
@@ -141,7 +147,12 @@ document.addEventListener("DOMContentLoaded", () => {
       const centro = faixaRect.left + faixaRect.width / 2;
       const maxDist = faixaRect.width / 2 + itemWidth;
 
+      const BASE_W = 240;
+      const BASE_H = 260;
+      const ASPECT = BASE_H / BASE_W;
+
       itensAnimados.forEach((item) => {
+        const img = item.querySelector("img");
         const rect = item.getBoundingClientRect();
         const itemCentro = rect.left + rect.width / 2;
 
@@ -150,16 +161,23 @@ document.addEventListener("DOMContentLoaded", () => {
           1,
         );
 
-        // Curva suave: centro menor, laterais maiores
         const ease = Math.pow(distNormalizada, 1.35);
 
-        const scale = 0.8 + ease * 0.5; // 0.66 -> 1.16
-        const translateY = (1 - ease) * 24; // centro mais "fundo"
-        const opacity = 0.72 + ease * 0.28; // 0.72 -> 1
-        const blur = (1 - ease) * 1.1; // centro mais suave
+        const scaleFactor = 1.2 + ease * 0.5;
+        const newW = Math.round(BASE_W * scaleFactor);
+        const newH = Math.round(newW * ASPECT);
+
+        const translateY = 0;
+        const opacity = 0.85 + ease * 0.28;
+        const blur = Math.max(0, (0.7 - ease) * 1.1);
         const zIndex = Math.round(ease * 100);
 
-        item.style.transform = `translateY(${translateY}px) scale(${scale})`;
+        if (img) {
+          img.style.width = `${newW}px`;
+          img.style.height = `${newH}px`;
+        }
+
+        item.style.transform = `translateY(${translateY}px)`;
         item.style.opacity = opacity;
         item.style.filter = `blur(${blur}px)`;
         item.style.zIndex = zIndex;
@@ -172,9 +190,13 @@ document.addEventListener("DOMContentLoaded", () => {
       currentTranslate += velocity;
       velocity *= 0.96;
 
+      if (Math.abs(velocity) < 0.05) {
+        velocity = 0;
+      }
+
       aplicarTransformacao();
 
-      if (Math.abs(velocity) > 0.1) {
+      if (velocity !== 0) {
         animationID = requestAnimationFrame(loopInercia);
       }
     }
@@ -184,12 +206,18 @@ document.addEventListener("DOMContentLoaded", () => {
       cancelAnimationFrame(animationID);
 
       startX = e.type.includes("mouse") ? e.clientX : e.touches[0].clientX;
+
       prevTranslate = currentTranslate;
+
       lastMouseX = startX;
       lastTime = Date.now();
 
       faixaDrag.style.transition = "none";
-      if (e.type.includes("mouse")) e.preventDefault();
+
+      if (e.type.includes("mouse")) {
+        e.preventDefault();
+      }
+
       limite.style.cursor = "grabbing";
     }
 
@@ -200,9 +228,13 @@ document.addEventListener("DOMContentLoaded", () => {
         ? e.clientX
         : e.touches[0].clientX;
 
-      const now = Date.now();
-      const dt = now - lastTime;
       const dx = currentX - lastMouseX;
+
+      currentTranslate += dx;
+
+      // velocidade
+      const now = performance.now();
+      const dt = now - lastTime;
 
       if (dt > 0) {
         velocity = (dx / dt) * 16;
@@ -211,19 +243,19 @@ document.addEventListener("DOMContentLoaded", () => {
       lastTime = now;
       lastMouseX = currentX;
 
-      const diff = currentX - startX;
-      currentTranslate = prevTranslate + diff;
-
       aplicarTransformacao();
     }
 
     function finalizarArraste() {
       if (!isDragging) return;
 
+      prevTranslate = currentTranslate;
+
       isDragging = false;
       limite.style.cursor = "grab";
 
       velocity *= 0.75;
+
       animationID = requestAnimationFrame(loopInercia);
     }
 
@@ -231,8 +263,14 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("mousemove", arrastar);
     document.addEventListener("mouseup", finalizarArraste);
 
-    limite.addEventListener("touchstart", iniciarArraste, { passive: true });
-    document.addEventListener("touchmove", arrastar, { passive: true });
+    limite.addEventListener("touchstart", iniciarArraste, {
+      passive: true,
+    });
+
+    document.addEventListener("touchmove", arrastar, {
+      passive: true,
+    });
+
     document.addEventListener("touchend", finalizarArraste);
 
     window.addEventListener("resize", atualizarDimensoes);

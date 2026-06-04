@@ -293,7 +293,7 @@ button:focus {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 40px;
+  gap: 20px;
   cursor: grab;
   user-select: none;
   width: max-content;
@@ -321,16 +321,17 @@ button:focus {
 }
 .circulo {
   position: absolute;
-  width: 117%;
-  height: 150px;
+  width: 115%;
+  height: 165px;
   z-index: 2;
-  top: -20%;
-  left: -8.5%;
+  top: -7%;
+  bottom: auto;
+  left: -7.5%;
   /* border:#000000 solid 2px; */
 }
 .circulo-de-baixo {
   top: auto;
-  bottom: -20%;
+  bottom: -7%;
 }
 .carrossel-drag-container {
   margin-top: 50px;
