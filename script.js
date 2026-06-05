@@ -381,8 +381,11 @@ document.addEventListener("DOMContentLoaded", () => {
         parseFloat(getComputedStyle(faixaOfertas).paddingLeft) || 0;
       const larguraTotal = itens.length * (itemWidth + gap) - gap + padding * 2;
 
+      const centroTela = larguraTela / 2;
+      const centroCard = itemWidth / 2;
+
       const offsetCentralizado =
-        -(index * (itemWidth + gap)) + (larguraTela / 2 - itemWidth / 2);
+        centroTela - centroCard - padding - index * (itemWidth + gap);
 
       // Limite esquerdo: começa no padding, não em zero
       const limiteEsquerdo = padding;
@@ -525,6 +528,9 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("resize", () => {
       snapParaCard(calcularSnap());
     });
+
+    currentTranslate = offsetIdealParaCard(1);
+    aplicarTranslate(currentTranslate);
   }
 
   inicializarCarrosselOfertas();
