@@ -264,7 +264,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 350);
   }
 
-  // Gatilhos de abertura 
+  // Gatilhos de abertura
   // Clique no container fechado (exceto nos botões de tipo)
   buscadorColapsado.addEventListener("click", (e) => {
     const isTipoBtnCol = e.target.closest(".btn-tipo");
@@ -350,4 +350,182 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Estado inicial
   sincronizarTipo();
+
+  // =====================
+  // CARROSSEL OFERTAS — DRAG + SNAP
+  // =====================
+  function inicializarCarrosselOfertas() {
+    const faixaOfertas = document.getElementById("ofertasFaixa");
+    if (!faixaOfertas) return;
+
+    const limite = faixaOfertas.closest(".carrossel-ofertas-limite");
+
+    let isDragging = false;
+    let currentTranslate = 0;
+    let velocity = 0;
+    let animationID;
+    let lastMouseX = 0;
+    let lastTime = 0;
+
+    // Lê o gap diretamente do CSS — nunca mais dessincroniza
+    function getGap() {
+      return parseFloat(getComputedStyle(faixaOfertas).gap) || 0;
+    }
+
+    function offsetIdealParaCard(index) {
+      const itens = Array.from(faixaOfertas.children);
+      const itemWidth = faixaOfertas.children[0].offsetWidth;
+      const gap = getGap();
+      const larguraTela = limite.offsetWidth;
+      const padding =
+        parseFloat(getComputedStyle(faixaOfertas).paddingLeft) || 0;
+      const larguraTotal = itens.length * (itemWidth + gap) - gap + padding * 2;
+
+      const offsetCentralizado =
+        -(index * (itemWidth + gap)) + (larguraTela / 2 - itemWidth / 2);
+
+      // Limite esquerdo: começa no padding, não em zero
+      const limiteEsquerdo = padding;
+
+      // Limite direito: desconta o padding dos dois lados
+      const limiteDireito = larguraTela - larguraTotal + padding;
+
+      if (larguraTotal <= larguraTela) return padding;
+
+      return Math.min(
+        limiteEsquerdo,
+        Math.max(limiteDireito, offsetCentralizado),
+      );
+    }
+
+    function calcularSnap() {
+      const itens = Array.from(faixaOfertas.children);
+      let melhorIndex = 0;
+      let melhorDistancia = Infinity;
+
+      itens.forEach((_, i) => {
+        const distancia = Math.abs(currentTranslate - offsetIdealParaCard(i));
+        if (distancia < melhorDistancia) {
+          melhorDistancia = distancia;
+          melhorIndex = i;
+        }
+      });
+
+      return melhorIndex;
+    }
+
+    function snapParaCard(index) {
+      const destino = offsetIdealParaCard(index);
+      currentTranslate = destino;
+
+      faixaOfertas.style.transition =
+        "transform 0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
+      faixaOfertas.style.transform = `translateX(${destino}px)`;
+    }
+
+    function aplicarTranslate(valor) {
+      faixaOfertas.style.transition = "none";
+      faixaOfertas.style.transform = `translateX(${valor}px)`;
+    }
+
+    function loopInercia() {
+      if (isDragging) return;
+
+      currentTranslate += velocity;
+      velocity *= 0.92;
+
+      if (Math.abs(velocity) < 0.5) {
+        velocity = 0;
+        snapParaCard(calcularSnap());
+        return;
+      }
+
+      aplicarTranslate(currentTranslate);
+      animationID = requestAnimationFrame(loopInercia);
+    }
+
+    function iniciarArraste(e) {
+      isDragging = true;
+      cancelAnimationFrame(animationID);
+
+      lastMouseX = e.type.includes("mouse") ? e.clientX : e.touches[0].clientX;
+      lastTime = performance.now();
+
+      faixaOfertas.style.transition = "none";
+      limite.style.cursor = "grabbing";
+
+      if (e.type.includes("mouse")) e.preventDefault();
+    }
+
+    function arrastar(e) {
+      if (!isDragging) return;
+
+      const currentX = e.type.includes("mouse")
+        ? e.clientX
+        : e.touches[0].clientX;
+      const dx = currentX - lastMouseX;
+
+      const itens = Array.from(faixaOfertas.children);
+      const itemWidth = faixaOfertas.children[0].offsetWidth;
+      const gap = getGap();
+      const larguraTela = limite.offsetWidth;
+      const padding =
+        parseFloat(getComputedStyle(faixaOfertas).paddingLeft) || 0;
+      const larguraTotal = itens.length * (itemWidth + gap) - gap + padding * 2;
+
+      const limiteEsquerdo = padding;
+      const limiteDireito = larguraTela - larguraTotal + padding;
+
+      currentTranslate += dx;
+
+      if (currentTranslate > limiteEsquerdo) {
+        const excesso = currentTranslate - limiteEsquerdo;
+        currentTranslate = limiteEsquerdo + excesso * 0.2;
+      } else if (currentTranslate < limiteDireito) {
+        const excesso = limiteDireito - currentTranslate;
+        currentTranslate = limiteDireito - excesso * 0.2;
+      }
+
+      const now = performance.now();
+      const dt = now - lastTime;
+      if (dt > 0) velocity = (dx / dt) * 16;
+      lastTime = now;
+      lastMouseX = currentX;
+
+      aplicarTranslate(currentTranslate);
+    }
+
+    function finalizarArraste() {
+      if (!isDragging) return;
+
+      isDragging = false;
+      limite.style.cursor = "grab";
+
+      if (Math.abs(velocity) < 1) {
+        snapParaCard(calcularSnap());
+      } else {
+        velocity *= 0.6;
+        animationID = requestAnimationFrame(loopInercia);
+      }
+    }
+
+    limite.addEventListener("mousedown", iniciarArraste);
+    document.addEventListener("mousemove", arrastar);
+    document.addEventListener("mouseup", finalizarArraste);
+    limite.addEventListener("touchstart", iniciarArraste, { passive: false });
+    document.addEventListener("touchmove", arrastar, { passive: false });
+    document.addEventListener("touchend", finalizarArraste);
+
+    setTimeout(() => {
+      currentTranslate =
+        parseFloat(getComputedStyle(faixaOfertas).paddingLeft) || 0;
+      aplicarTranslate(currentTranslate);
+    }, 50);
+
+    window.addEventListener("resize", () => {
+      snapParaCard(calcularSnap());
+    });
+  }
+
+  inicializarCarrosselOfertas();
 });
