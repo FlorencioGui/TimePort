@@ -747,12 +747,15 @@ button:focus {
 .carrossel-ofertas-item{
   border: 4px solid #3d5eab;
   border-radius: 16px;
-  overflow: hidden;
+  /* overflow: hidden; */
   background-color: white;
   padding: 20px;
   min-width: 400px;
   flex-shrink: 0;
   width: calc((100% - 60px) / 3);
+}
+.carrossel-ofertas-item img{
+  border-radius: 12px 12px 0 0;
 }
 .carrossel-ofertas-item .parte-superior {
   position: relative;
@@ -841,12 +844,12 @@ button:focus {
   transform: translateY(-2px);
 }
 .principais-ofertas {
-  background-color: #f9f9f9;
-  padding: 50px 0;
+  background-color: #F16E1F;
+  padding: 20px 0;
 }
 .principais-ofertas h1 {
   color: #2A478C;
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 700;
   font-family: sora, sans-serif;
   margin: 0 0 30px 0;
@@ -856,7 +859,6 @@ button:focus {
   overflow: hidden;
   cursor: grab;
 }
-
 .carrossel-ofertas-limite:active {
   cursor: grabbing;
 }
@@ -873,14 +875,140 @@ button:focus {
 }
 .desconto {
   position: absolute;
-  top: 0px;
-  left: 520px;
-  width: 50px;
-  height: 50px;
+  top: -25px;
+  left: -25px;
+  width: 60px;
+  height: 60px;
   z-index: 2;
 }
-.desconto2 {
-  left: 1950px;
+.tp-plus {
+  background-color: #f2f2f2;
+  padding: 70px 80px;
+  font-family: "Poppins", sans-serif;
+}
+.tp-plus-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.tp-plus-header h1 {
+  color: #2a478c;
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 1;
+}
+.tp-plus-header p {
+  margin-top: 8px;
+  font-size: 20px;
+  color: #444;
+}
+.tp-plus-logo {
+  width: 120px;
+  height: auto;
+}
+.tp-plus h2 {
+  margin-top: 90px;
+  margin-bottom: 30px;
+  color: #2a478c;
+  font-size: 42px;
+}
+.planos-container {
+  display: flex;
+  justify-content: space-between;
+  /* margin: 0 60px; */
+}
+.plano-card {
+  width: 420px;
+  border: 3px solid #3f63bf;
+  border-radius: 18px;
+  overflow: hidden;
+}
+.plano-topo {
+  background: white;
+  padding: 16px 18px 10px;
+  border-bottom: 3px solid #3f63bf;
+}
+.plano-topo h3 {
+  color: #2a478c;
+  font-size: 30px;
+  line-height: 1;
+}
+.plano-topo span {
+  display: block;
+  margin-top: 4px;
+  color: #2a478c;
+  font-size: 18px;
+  font-weight: 700;
+}
+.plano-conteudo {
+  padding: 20px;
+  /* min-height: 320px; */
+  display: flex;
+  flex-direction: column;
+}
+.plano-conteudo ul {
+  padding-left: 22px;
+  margin-bottom: 25px;
+}
+.plano-conteudo li {
+  margin-bottom: 8px;
+  font-size: 16px;
+  font-weight: 600;
+}
+.plano-branco {
+  background: white;
+  color: #2a478c;
+}
+.plano-azul {
+  background: #6384d6;
+  color: white;
+}
+.plano-laranja {
+  background: #ff8d28;
+  color: white;
+}
+.ou {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 12px 0;
+}
+.btn-laranja,
+.btn-branco,
+.btn-azul,
+.btn-cinza,
+.btn-escuro,
+.btn-marrom {
+  border: none;
+  border-radius: 14px;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.btn-laranja {
+  background: #ff8d28;
+  color: white;
+}
+.btn-branco {
+  background: white;
+  color: #3f63bf;
+}
+.btn-azul {
+  background: #3f63bf;
+  color: white;
+}
+.btn-cinza {
+  background: #666;
+  color: white;
+}
+.btn-escuro {
+  background: #1e295f;
+  color: white;
+}
+.btn-marrom {
+  background: #8a531f;
+  color: white;
 }
 
 /* Modal Lingua */
