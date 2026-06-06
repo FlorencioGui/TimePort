@@ -345,12 +345,14 @@ button:focus {
   font-size: 25px;
   font-weight: bold;
   text-align: center;
-  margin-top: 30px;
   font-family: sora, sans-serif;
   border-radius: 20px;
-  margin: 20px 330px;
+  width: 700px;
   background-color: #3d5eab;
   padding: 7px 0px;
+  position: relative;
+  left: calc(50% - 350px);
+  bottom: 20px;
 }
 
 .buscador {
@@ -361,10 +363,9 @@ button:focus {
 }
 .buscador h2 {
   color: #001850;
-  font-size: 25px;
+  font-size: 30px;
   font-weight: bold;
-  margin-top: 30px;
-  margin-left: 60px;
+  margin: 0px 0 20px 60px;
   font-family: sora, sans-serif;
 }
 .buscador-container {
@@ -744,7 +745,7 @@ button:focus {
 .btn-procurar:active {
   transform: translateY(0);
 }
-.carrossel-ofertas-item{
+.carrossel-ofertas-item {
   border: 4px solid #3d5eab;
   border-radius: 16px;
   /* overflow: hidden; */
@@ -754,16 +755,16 @@ button:focus {
   flex-shrink: 0;
   width: calc((100% - 60px) / 3);
 }
-.carrossel-ofertas-item img{
+.carrossel-ofertas-item img {
   border-radius: 12px 12px 0 0;
 }
 .carrossel-ofertas-item .parte-superior {
   position: relative;
   margin: -20px -20px 0 -20px;
-  }
+}
 .carrossel-ofertas-item .imagem-superior {
   width: 100%;
-  height: 210px;
+  height: 250px;
   object-fit: cover;
 }
 .data-oferta {
@@ -779,7 +780,7 @@ button:focus {
   font-family: sora, sans-serif;
 }
 .titulo-oferta {
-  color: #2A478C;
+  color: #2a478c;
   font-size: 24px;
   font-weight: 700;
   font-family: sora, sans-serif;
@@ -837,19 +838,18 @@ button:focus {
   cursor: pointer;
   transition: all 0.3s ease;
   align-self: center;
-
 }
 .btn-comprar-oferta:hover {
   background-color: #2a478c;
   transform: translateY(-2px);
 }
 .principais-ofertas {
-  background-color: #F16E1F;
-  padding: 20px 0;
+  background-color: #f16e1f;
+  padding: 50px 0;
 }
 .principais-ofertas h1 {
-  color: #2A478C;
-  font-size: 32px;
+  color: #2a478c;
+  font-size: 40px;
   font-weight: 700;
   font-family: sora, sans-serif;
   margin: 0 0 30px 0;
@@ -902,10 +902,6 @@ button:focus {
   font-size: 20px;
   color: #444;
 }
-.tp-plus-logo {
-  width: 120px;
-  height: auto;
-}
 .tp-plus h2 {
   margin-top: 90px;
   margin-bottom: 30px;
@@ -945,6 +941,8 @@ button:focus {
   /* min-height: 320px; */
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  height: 390px;
 }
 .plano-conteudo ul {
   padding-left: 22px;
@@ -976,39 +974,108 @@ button:focus {
 .btn-laranja,
 .btn-branco,
 .btn-azul,
-.btn-cinza,
-.btn-escuro,
-.btn-marrom {
+.btn-cinza {
   border: none;
   border-radius: 14px;
   padding: 12px;
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
+  width: 100%;
 }
 .btn-laranja {
   background: #ff8d28;
   color: white;
+  transition: all 0.2s ease;
+}
+.btn-laranja:hover {
+  background: #e67a18;
+  transform: translateY(-2px);
 }
 .btn-branco {
   background: white;
   color: #3f63bf;
+  transition: all 0.2s ease;
+}
+.btn-branco:hover {
+  background: #f0f4fc;
+  transform: translateY(-2px);
 }
 .btn-azul {
   background: #3f63bf;
   color: white;
+  transition: all 0.2s ease;
+}
+.btn-azul:hover {
+  background: #2a478c;
+  transform: translateY(-2px);
 }
 .btn-cinza {
-  background: #666;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.9) 24%, #666666 100%);
   color: white;
+  transition: all 0.2s ease;
 }
-.btn-escuro {
-  background: #1e295f;
-  color: white;
+.btn-cinza:hover {
+  opacity: 0.85;
+  transform: translateY(-2px);
 }
-.btn-marrom {
-  background: #8a531f;
-  color: white;
+.comparacao {
+  width: 100%;
+  padding: 80px 20px;
+  text-align: center;
+}
+.comparacao_titulo {
+  font-size: 50px;
+  font-weight: 700;
+  color: #284a99;
+  margin-bottom: 12px;
+  font-family: sora, sans-serif;
+}
+.comparacao_subtitulo {
+  font-size: 22px;
+  color: #6b6b6b;
+  line-height: 1.5;
+  margin-bottom: 60px;
+  font-family: popins, sans-serif;
+}
+.comparacao_tabela {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-family: popins, sans-serif;
+}
+.comparacao_tabela thead tr {
+  border-bottom: 2px solid #000;
+}
+.comparacao_tabela th {
+  padding-bottom: 22px;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+}
+.comparacao_tabela td {
+  padding: 30px 20px;
+  font-size: 20px;
+  text-align: center;
+  vertical-align: middle;
+}
+.comparacao_tabela th,
+.comparacao_tabela td {
+  width: 33.33%;
+}
+.comparacao_check {
+  width: 44px;
+  display: block;
+  margin: 0 auto;
+}
+.comparacao_traco {
+  width: 65px;
+  height: 4px;
+  border: none;
+  background: #000;
+  margin: 0 auto;
 }
 
 /* Modal Lingua */
