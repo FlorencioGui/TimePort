@@ -73,6 +73,75 @@ document.addEventListener("DOMContentLoaded", () => {
   atualizarCarrossel();
 
   // =====================
+  // CARROSSEL PRINCIPAL — DRAG/SWIPE (MOUSE + TOUCH)
+  // =====================
+  let dragStartX = 0;
+  let dragEndX = 0;
+  let isDragging = false;
+
+  // Suporte a TOUCH (mobile)
+  faixa.addEventListener(
+    "touchstart",
+    (e) => {
+      dragStartX = e.changedTouches[0].clientX;
+      isDragging = true;
+    },
+    { passive: true },
+  );
+
+  faixa.addEventListener(
+    "touchend",
+    (e) => {
+      dragEndX = e.changedTouches[0].clientX;
+      handleDrag();
+      isDragging = false;
+    },
+    { passive: true },
+  );
+
+  // Suporte a MOUSE (desktop)
+  faixa.addEventListener("mousedown", (e) => {
+    dragStartX = e.clientX;
+    isDragging = true;
+    faixa.style.cursor = "grabbing";
+  });
+
+  document.addEventListener("mousemove", (e) => {
+    if (!isDragging || dragStartX === 0) return;
+    // Feedback visual ao arrastar
+    faixa.style.cursor = "grabbing";
+  });
+
+  document.addEventListener("mouseup", (e) => {
+    if (!isDragging) return;
+    dragEndX = e.clientX;
+    handleDrag();
+    isDragging = false;
+    faixa.style.cursor = "grab";
+  });
+
+  function handleDrag() {
+    const diferenca = dragStartX - dragEndX;
+    const limiar = 30; // Mínimo de pixels para detectar drag/swipe
+
+    if (Math.abs(diferenca) > limiar) {
+      // Drag para a esquerda (próximo)
+      if (diferenca > 0 && itemAtual < totalItens - 1) {
+        itemAtual++;
+        atualizarCarrossel();
+      }
+      // Drag para a direita (anterior)
+      else if (diferenca < 0 && itemAtual > 0) {
+        itemAtual--;
+        atualizarCarrossel();
+      }
+    }
+
+    dragStartX = 0;
+    dragEndX = 0;
+  }
+
+  // =====================
   // CARROSSEL DRAG
   // =====================
   function inicializarCarrosselDragFluido(selectorFaixa) {

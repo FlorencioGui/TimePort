@@ -32,6 +32,11 @@
             </li>
           </ul>
         </nav>
+        <button class="btn-hamburger" id="btnHamburger" aria-label="Abrir menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
       <div class="pt2">
         <div class="user">
@@ -56,7 +61,26 @@
         </div>
       </div>
     </header>
-    <hr />
+    <nav class="nav-mobile" id="navMobile">
+      <ul>
+        <li>
+          <a href="#epocas-locais"
+            >Épocas/Locais <img src="files/icon1.png" alt="" class="seta"
+          /></a>
+        </li>
+        <li>
+          <a href="#reservas"
+            >Reservas <img src="files/icon1.png" alt="" class="seta"
+          /></a>
+        </li>
+        <li>
+          <a class="tpplus" href="#tp-plus"
+            >TP Plus <img src="files/icon1.png" alt="" class="seta"
+          /></a>
+        </li>
+      </ul>
+    </nav>
+    <hr class="hr-fixo" />
     <main>
       <section class="carrossel">
         <span class="titulo-carrossel"
@@ -314,13 +338,13 @@
                       <a
                         href="#tp-plus"
                         style="
-                          margin: 4px 10px 0;
+                          margin: 5.2px 13px 0;
                           background-color: #ff8d28;
                           color: white;
                           font-weight: bold;
-                          font-size: 13px;
-                          padding: 8px 16px;
-                          border-radius: 13px;
+                          font-size: 16.9px;
+                          padding: 10.4px 20.8px;
+                          border-radius: 16.9px;
                           text-decoration: none;
                           text-align: center;
                         "
@@ -702,7 +726,9 @@
                   alt="Viaje para Marte com o Elon Musk"
                   class="imagem-superior"
                 />
-                <p class="data-oferta tp-oferta">TP 2050 d.C.</p>
+                <p class="data-oferta tp-oferta">
+                  <strong>TP</strong> 2050 d.C.
+                </p>
               </div>
               <h3 class="titulo-oferta">Viaje para Marte com o Elon Musk</h3>
               <p class="saida-oferta">Saindo de New York</p>
@@ -973,6 +999,124 @@
           </tbody>
         </table>
       </section>
+      <section class="avaliacoes">
+        <h1>Avaliações</h1>
+        <div class="comentarios">
+          <div class="card-comentario aparece-mobile">
+            <img src="files/star.svg" alt="Estrelas" />
+            <article>
+              <p>
+                "Sempre sonhei em ver a chegada do homem à Lua de perto. A
+                experiência foi incrível e muito bem organizada. Com certeza
+                farei outra viagem! <br />
+                <br />
+                <br />
+                <br />
+                - Ricardo M.
+              </p>
+            </article>
+          </div>
+          <div class="card-comentario some-mobile">
+            <img src="files/star.svg" alt="Estrelas" />
+            <article>
+              <p>
+                "Viajar para a época do Renascimento e acompanhar os grandes
+                artistas da história foi algo inesquecível. Atendimento
+                excelente e roteiro impecável. <br />
+                <br />
+                <br />
+                - Marcela L.
+              </p>
+            </article>
+          </div>
+          <div class="card-comentario some-mobile">
+            <img src="files/star.svg" alt="Estrelas" />
+            <article>
+              <p>
+                "Escolhi um pacote para conhecer o Egito Antigo e superou todas
+                as minhas expectativas. Segurança, conforto e uma experiência
+                que parece saída de um sonho." <br />
+                <br />
+                <br />
+                - Tomas S.
+              </p>
+            </article>
+          </div>
+          <div class="card-comentario some-mobile">
+            <img src="files/star.svg" alt="Estrelas" />
+            <article>
+              <p>
+                "Poder visitar a Roma Antiga e assistir aos eventos do Coliseu
+                foi uma experiência impressionante. A equipe cuidou de cada
+                detalhe e me senti completamente seguro durante toda a viagem."
+                <br />
+                <br />
+                - Juliana R.
+              </p>
+            </article>
+          </div>
+          <!-- <div class="card-comentario">
+            <img src="files/star.svg" alt="Estrelas" />
+            <article>
+              <p>
+                "Nunca imaginei que poderia caminhar pelas primeiras colônias de
+                Marte. A tecnologia utilizada tornou tudo extremamente realista
+                e confortável. Recomendo para qualquer apaixonado por exploração
+                espacial."
+                <br />
+                <br />
+                - Eduardo P.
+              </p>
+            </article>
+          </div> -->
+        </div>
+      </section>
+      
+      <section class="quem-nos-somos">
+        <div class="header-quem-somos">
+          <div class="textos">
+            <h1>Quem nós somos?</h1>
+            <p>Isaque Augusto e Guilherme Florêncio</p>
+          </div>
+          <img src="files/logo.png" alt="Logo Time Port" />
+        </div>
+        <div class="main-quem-somos">
+          <article>
+            <p>
+              Somos <strong>Isaque Augusto</strong> e
+              <strong>Guilherme Florêncio</strong>, desenvolvedores mundialmente
+              reconhecidos (pelo menos em nossas próprias casas), especialistas
+              em tecnologia, inovação e em resolver problemas que nós mesmos
+              criamos durante a programação. <br />
+              Ao longo de nossa carreira, já colaboramos secretamente com
+              gigantes da tecnologia como Google, Microsoft, NASA e até mesmo os
+              engenheiros responsáveis pela máquina do tempo (embora ainda não
+              possamos revelar detalhes por questões de segurança temporal).
+              Nosso objetivo é proporcionar a melhor experiência possível para
+              nossos visitantes, conectando pessoas aos destinos mais incríveis
+              da história. Afinal, viajar pelo tempo exige uma plataforma à
+              altura.
+              <br />
+              <br />
+              Obrigado por visitar nosso projeto. Se encontrar algum erro,
+              considere-o uma funcionalidade experimental desenvolvida por nossa
+              equipe de pesquisa e inovação. Atenciosamente,
+            </p>
+            <br />
+            <p class="texto-azul">Isaque Augusto & Guilherme Florêncio</p>
+            <br />
+            <p>
+              Fundadores, CEOs, Desenvolvedores Sênior, Especialistas em Viagens
+              Temporais, Consultores Tecnológicos Internacionais e Sobreviventes
+              de Bugs Misteriosos.
+            </p>
+          </article>
+          <div class="imagem-quem-somos">
+            <img src="files/eoscara.png" alt="Isaque e Guilherme" />
+            <p>É os cara de D.S.</p>
+          </div>
+        </div>
+      </section>
 
       <!-- overlay + container expandido -->
       <div class="buscador-overlay" id="buscadorOverlay"></div>
@@ -1105,7 +1249,6 @@
               <option value="first">Primeira Classe</option>
             </select>
           </div>
-
           <div class="buscador-exp-field buscador-exp-data" id="fieldDataIda">
             <label class="buscador-exp-label">Ida</label>
             <div class="buscador-exp-input-icon">
@@ -1135,7 +1278,6 @@
               </svg>
             </div>
           </div>
-
           <div class="buscador-exp-field buscador-exp-data" id="fieldDataVolta">
             <label class="buscador-exp-label">Volta</label>
             <div class="buscador-exp-input-icon">
@@ -1228,6 +1370,41 @@
       </div>
     </main>
 
+    <footer class="rodape">
+      <div class="conteudo-rodape">
+        <div class="coluna-rodape">
+          <h2>Ajuda</h2>
+          <a href="#">Máquina do tempo</a>
+          <a href="#">Acompanhe sua solicitação</a>
+          <a href="#">Alteração e cancelamento</a>
+          <a href="#">Como realizar o check-in</a>
+          <a href="#">Problemas com bagagem</a>
+          <a href="#">Fale conosco</a>
+        </div>
+        <div class="coluna-rodape">
+          <h2>Conheça TimePort</h2>
+          <a href="#">Parcerias</a>
+          <a href="#">TimePort empresas</a>
+          <a href="#">Trabalhe na TimePort</a>
+          <a href="#">Fretamento</a>
+          <a href="#">Portal agências</a>
+        </div>
+        <div class="coluna-rodape pagamentos">
+          <h2>Formas de pagamento</h2>
+          <div class="grupo-pagamento">
+            <p>Crédito:</p>
+            <img src="files/bandeiras.png" alt="Bandeiras dos cartões" />
+          </div>
+          <div class="grupo-pagamento">
+            <p>Outros:</p>
+            <img src="files/pix.png" alt="PIX" />
+          </div>
+        </div>
+      </div>
+      <hr class="linha-rodape" />
+      <p class="copyright">TimePort agency © 2026 - Linhas do tempo Mundial</p>
+    </footer>
+
     <div class="modal-lingua" id="modalLingua">
       <div class="modal-content">
         <h3>Selecione o idioma</h3>
@@ -1239,5 +1416,6 @@
       </div>
     </div>
     <script src="script.js"></script>
+    <script src="mobile.js"></script>
   </body>
 </html>
